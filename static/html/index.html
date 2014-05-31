@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css">
+		<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="row" style="margin-top:5%">
+			<div class="col-md-offset-1 col-md-4">
+				<div class="table">
+					<table class="table table-hover table-bordered">
+						<tbody class="text-center">
+							<tr>
+								<td><p>姓名:</p><p id="name-0"></p></td>
+								<td><img id="avatar-0"></img><img id="avatar-1"></img></td>
+								<td><p>姓名:</p><p id="name-1"></p></td>
+							</tr>
+							<tr>
+								<td><p id="atk-0"></p></td>
+								<td><p>攻击力</p></td>
+								<td><p id="atk-1"></p></td>
+							</tr>
+							<tr>
+								<td><p id="def-0"></p></td>
+								<td><p>防御</p></td>
+								<td><p id="def-1"></p></td>
+							</tr>
+							<tr>
+								<td><p id="speed-0"></p></td>
+								<td><p>速度</p></td>
+								<td><p id="speed-1"></p></td>
+							</tr>
+							<tr>
+								<td><p id="accurately-0"></p></td>
+								<td><p>命中</p></td>
+								<td><p id="accurately-1"></p></td>
+							</tr>
+							<tr>
+								<td><p id="lucky-0"></p></td>
+								<td><p>运气</p></td>s
+								<td><p id="lucky-1"></p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-offset-0 col-md-4" style="border: 1px solid #ddd;">
+				<p id="fight">
+				</p>
+			</div>
+			<div class="col-md-offset-4 col-md-4">
+				<button type="button" class="btn btn-default" onclick="movement(person1,person2)"  placeholder=".col-md-4">fight</button>
+			</div>
+		</div>
+	</body>
+	<footer>
+		<script src="../js/main.js"></script>
+	</footer>
+</html>
