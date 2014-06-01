@@ -19,7 +19,7 @@ personRenrenFactory = function(personData)
 	var sum = personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount;
 
 	newPerson.name = personData.name;
-	newPerson.attack=(personData.visitorCount+personData.blogCount+personData.pageCount)/sum*FIGHT_CONFIG.MAX_ATTACK;
+	newPerson.attack=(personData.visitorCount+personData.blogCount+personData.pageCount)/sum*FIGHT_CONFIG.MAX_ATTACK+100;
 	newPerson.def=(personData.albumCount+personData.visitorCount)/sum*FIGHT_CONFIG.MAX_DEF;
 	newPerson.lucky=personData.statusCount/personData.friendCount/sum*FIGHT_CONFIG.MAX_LUCK+40;
 	newPerson.speed=(personData.visitorCount+personData.albumCount)/sum*FIGHT_CONFIG.MAX_SPEED+20;
