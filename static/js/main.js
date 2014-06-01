@@ -18,12 +18,12 @@ personRenrenFactory = function(personData)
 	var newPerson = new person();
 
 	newPerson.name = personData.name;
-	newPerson.attack=(personData.blogCount+personData.pageCount)/300.0*FIGHT_CONFIG.MAX_ATTACK;
-	newPerson.def=(personData.albumCount+personData.pageCount)/200.0*FIGHT_CONFIG.MAX_DEF;
-	newPerson.lucky=personData.statusCount/2000*FIGHT_CONFIG.MAX_LUCK;
-	newPerson.speed=personData.visitorCount/personData.albumCount/7;
+	newPerson.attack=(personData.blogCount+personData.pageCount)/personData.statusCount*1.5*FIGHT_CONFIG.MAX_ATTACK;
+	newPerson.def=(personData.albumCount+personData.visitorCount)/personData.statusCount/5*FIGHT_CONFIG.MAX_DEF;
+	newPerson.lucky=personData.statusCount/personData.friendCount/10*FIGHT_CONFIG.MAX_LUCK+40;
+	newPerson.speed=(personData.visitorCount+personData.albumCount)*20/personData.statusCount+20;
 	newPerson.accurately =  personData.visitorCount / personData.friendCount /10 * FIGHT_CONFIG.MAX_ACCURATELY + 50;
-	newPerson.maxHp=FIGHT_CONFIG.MAX_HP*(personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount)/10000;
+	newPerson.maxHp=FIGHT_CONFIG.MAX_HP*(personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount)/personData.friendCount/10;
 	newPerson.hp=newPerson.maxHp;
 	newPerson.photo = personData.avatarAdd;
 
@@ -54,7 +54,10 @@ movement = function (attacker,defer) {
 	var attack = attacker.attack+(attacker.lucky*Math.random()*FIGHT_CONFIG.FACTORY_LUCK/FIGHT_CONFIG.MAX_LUCK);
 	var def = defer.def+(defer.lucky*FIGHT_CONFIG.FACTORY_LUCK/FIGHT_CONFIG.MAX_LUCK*Math.random());
 	var hurt = parseInt(attack - def);
-	if(hurt<0)parseInt(hurt=10*Math.random());
+	if(hurt<0)
+		{
+			hurt=parseInt(10*Math.random());
+		}
 
 	if (miss) 
 		{			
@@ -69,7 +72,7 @@ movement = function (attacker,defer) {
 				render([person1,person2],attacker.name +"获得了胜利");
 			}else
 			{
-				render([person1,person2],defer.name +"收到了" + hurt +"的伤害");
+				render([person1,person2],defer.name +"收到了" + hurt +"的伤害");				
 				setTimeout(function() {movement(defer,attacker)},300);
 			}
 		}
