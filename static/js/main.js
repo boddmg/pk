@@ -22,9 +22,10 @@ personRenrenFactory = function(personData)
 	newPerson.def=(personData.albumCount+personData.pageCount)/200.0*FIGHT_CONFIG.MAX_DEF;
 	newPerson.lucky=personData.statusCount/2000*FIGHT_CONFIG.MAX_LUCK;
 	newPerson.speed=personData.visitorCount/personData.albumCount/7;
-	newPerson.accurately = personData.friendCount / personData.visitorCount * FIGHT_CONFIG.MAX_ACCURATELY;
+	newPerson.accurately =  personData.visitorCount / personData.friendCount /10 * FIGHT_CONFIG.MAX_ACCURATELY;
 	newPerson.maxHp=FIGHT_CONFIG.MAX_HP*(personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount)/10000;
 	newPerson.hp=newPerson.maxHp;
+	newPerson.photo = personData.avatarAdd;
 
 	newPerson.attack=parseInt(newPerson.attack);
 	newPerson.def=parseInt(newPerson.def);
@@ -53,7 +54,7 @@ movement = function (attacker,defer) {
 	var attack = attacker.attack+(attacker.lucky*Math.random()*FIGHT_CONFIG.FACTORY_LUCK/FIGHT_CONFIG.MAX_LUCK);
 	var def = defer.def+(defer.lucky*FIGHT_CONFIG.FACTORY_LUCK/FIGHT_CONFIG.MAX_LUCK*Math.random());
 	var hurt = parseInt(attack - def);
-	if(hurt<0)hurt=0;
+	if(hurt<0)parseInt(hurt=10*Math.random());
 
 	if (miss) 
 		{			
@@ -78,6 +79,8 @@ render = function (persons,text) {
 	var i=0;
 	for(i=0;i< persons.length;i++)
 	{
+
+		$("#avatar-"+i).attr("src",persons[i].photo);
 		$("#name-"+i).text(persons[i].name);
 		$("#HP-"+i).text(persons[i].hp);
 		$("#atk-"+i).text(persons[i].attack);
