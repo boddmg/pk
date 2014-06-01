@@ -11,6 +11,5 @@
 		require_once './class/config.inc.php'; 
 		header("Location: https://graph.renren.com/oauth/authorize?client_id=".$config->APPID."&redirect_uri=".$config->redirecturi."&response_type=code&display=page");
 	?>
-	<!-- <iframe class="mainpage" src="https://graph.renren.com/oauth/authorize?client_id=<?=$config->APPID?>&redirect_uri=<?=$config->redirecturi?>&response_type=code&display=page"></iframe> -->
 </body>
 </html>
