@@ -18,13 +18,28 @@ personRenrenFactory = function(personData)
 	var newPerson = new person();
 
 	newPerson.name = personData.name;
-	newPerson.attack=personData.a;
-	newPerson.def=personData.b;
-	newPerson.lucky=personData.c;
-	newPerson.speed=personData.d;
-	newPerson.accurately=personData.e;
-	newPerson.maxHp=personData.f;
+	newPerson.attack=(personData.blogCount+personData.pageCount)/300.0*FIGHT_CONFIG.MAX_ATTACK;
+	newPerson.def=(personData.albumCount+personData.pageCount)/200.0*FIGHT_CONFIG.MAX_DEF;
+	newPerson.lucky=personData.statusCount/2000*FIGHT_CONFIG.MAX_LUCK;
+	newPerson.speed=personData.visitorCount/personData.albumCount/7;
+	newPerson.accurately = personData.friendCount / personData.visitorCount * FIGHT_CONFIG.MAX_ACCURATELY;
+	newPerson.maxHp=FIGHT_CONFIG.MAX_HP*(personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount)/10000;
 	newPerson.hp=newPerson.maxHp;
+
+	newPerson.attack=parseInt(newPerson.attack);
+	newPerson.def=parseInt(newPerson.def);
+	newPerson.lucky=parseInt(newPerson.lucky);
+	newPerson.speed=parseInt(newPerson.speed);
+	newPerson.accurately = parseInt(newPerson.accurately);
+	newPerson.maxHp=parseInt(newPerson.maxHp);
+	newPerson.hp=newPerson.maxHp;
+
+	if (newPerson.attack>=FIGHT_CONFIG.MAX_ATTACK) {newPerson.attack=FIGHT_CONFIG.MAX_ATTACK};
+	if (newPerson.def>=FIGHT_CONFIG.MAX_DEF) {newPerson.def=FIGHT_CONFIG.MAX_DEF};
+	if (newPerson.lucky>=FIGHT_CONFIG.MAX_LUCK) {newPerson.def=FIGHT_CONFIG.MAX_LUCK};
+	if (newPerson.speed>=FIGHT_CONFIG.MAX_SPEED) {newPerson.def=FIGHT_CONFIG.MAX_SPEED};
+	if (newPerson.accurately>=FIGHT_CONFIG.MAX_ACCURATELY) {newPerson.def=FIGHT_CONFIG.MAX_ACCURATELY};
+	if (newPerson.maxHp>=FIGHT_CONFIG.MAX_HP) {newPerson.def=FIGHT_CONFIG.MAX_HP};
 	return newPerson;
 }
 
@@ -74,25 +89,8 @@ render = function (persons,text) {
 	$("#fight").html($("#fight").html()+text+"<br>");
 }
 
-var testPersondata={};
-testPersondata.name = "tester";
-testPersondata.a=FIGHT_CONFIG.MAX_ATTACK*0.7;
-testPersondata.b=FIGHT_CONFIG.MAX_DEF*0.7;
-testPersondata.c=FIGHT_CONFIG.MAX_LUCK*0.7;
-testPersondata.d=FIGHT_CONFIG.MAX_SPEED*0.7;
-testPersondata.e=FIGHT_CONFIG.MAX_ACCURATELY*0.7;
-testPersondata.f=FIGHT_CONFIG.MAX_HP*0.7;
+var person1=personRenrenFactory(person1Data);
 
-var person1=personRenrenFactory(testPersondata);
-
-testPersondata.name = "tester";
-testPersondata.a=FIGHT_CONFIG.MAX_ATTACK*0.5;
-testPersondata.b=FIGHT_CONFIG.MAX_DEF*0.5;
-testPersondata.c=FIGHT_CONFIG.MAX_LUCK*0.5;
-testPersondata.d=FIGHT_CONFIG.MAX_SPEED*0.5;
-testPersondata.e=FIGHT_CONFIG.MAX_ACCURATELY*0.5;
-testPersondata.f=FIGHT_CONFIG.MAX_HP*0.5;
-
-var person2=personRenrenFactory(testPersondata);
+var person2=personRenrenFactory(person2Data);
 
 render([person1,person2],"准备战斗");
