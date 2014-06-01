@@ -73,7 +73,7 @@ movement = function (attacker,defer) {
 			}else
 			{
 				render([person1,person2],defer.name +"收到了" + hurt +"的伤害");				
-				setTimeout(function() {movement(defer,attacker)},300);
+				setTimeout(function() {movement(defer,attacker)},1000);
 			}
 		}
 }
@@ -83,14 +83,15 @@ render = function (persons,text) {
 	for(i=0;i< persons.length;i++)
 	{
 
+		$("#HP-"+i).text(persons[i].hp);
 		$("#avatar-"+i).attr("src",persons[i].photo);
 		$("#name-"+i).text(persons[i].name);
-		$("#HP-"+i).text(persons[i].hp);
 		$("#atk-"+i).text(persons[i].attack);
 		$("#def-"+i).text(persons[i].def);
 		$("#speed-"+i).text(persons[i].speed);
 		$("#accurately-"+i).text(persons[i].accurately);
 		$("#lucky-"+i).text(persons[i].lucky);
+		$("#hpbar-"+i).animate({width:(persons[i].hp*100/persons[i].maxHp)+"%"},300);
 	}
 	$("#fight").html($("#fight").html()+text+"<br>");
 }
