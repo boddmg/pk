@@ -16,13 +16,14 @@ person = function() {
 personRenrenFactory = function(personData)
 {
 	var newPerson = new person();
+	var sum = personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount;
 
 	newPerson.name = personData.name;
-	newPerson.attack=(personData.blogCount+personData.pageCount)/personData.statusCount*1.5*FIGHT_CONFIG.MAX_ATTACK;
-	newPerson.def=(personData.albumCount+personData.visitorCount)/personData.statusCount/5*FIGHT_CONFIG.MAX_DEF;
-	newPerson.lucky=personData.statusCount/personData.friendCount/10*FIGHT_CONFIG.MAX_LUCK+40;
-	newPerson.speed=(personData.visitorCount+personData.albumCount)*20/personData.statusCount+20;
-	newPerson.accurately =  personData.visitorCount / personData.friendCount /10 * FIGHT_CONFIG.MAX_ACCURATELY + 50;
+	newPerson.attack=(personData.visitorCount+personData.blogCount+personData.pageCount)/sum*FIGHT_CONFIG.MAX_ATTACK;
+	newPerson.def=(personData.albumCount+personData.visitorCount)/sum*FIGHT_CONFIG.MAX_DEF;
+	newPerson.lucky=personData.statusCount/personData.friendCount/sum*FIGHT_CONFIG.MAX_LUCK+40;
+	newPerson.speed=(personData.visitorCount+personData.albumCount)/sum*FIGHT_CONFIG.MAX_SPEED+20;
+	newPerson.accurately =  (personData.visitorCount + personData.friendCount) /sum * FIGHT_CONFIG.MAX_ACCURATELY + 50;
 	newPerson.maxHp=FIGHT_CONFIG.MAX_HP*(personData.pageCount+personData.friendCount+personData.visitorCount+personData.statusCount+personData.blogCount+personData.albumCount)/personData.friendCount/10;
 	newPerson.hp=newPerson.maxHp;
 	newPerson.photo = personData.avatarAdd;
